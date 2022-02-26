@@ -1,7 +1,3 @@
-#THANKS FOR THE 500 STARS WITH ❤
-#check my profile for my other codes
-#this is a INTERMEDIATE LEVEL tic-tac-toe game
-#I bet you will win if you have good strategy thinking
 from random import choice #To select who will play first between player and computer
 from time   import sleep  #
 
