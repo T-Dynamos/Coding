@@ -1,2 +1,1 @@
-# PythonHeader
-Ohh just a script making work easier of programmers
+My shit ass programs
