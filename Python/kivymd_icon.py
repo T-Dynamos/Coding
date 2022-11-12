@@ -10,12 +10,14 @@ from kivymd.uix.list import OneLineIconListItem
 Builder.load_string(
     '''
 #:import images_path kivymd.images_path
-
+#: import Clipboard kivy.core.clipboard.Clipboard
 
 <CustomOneLineIconListItem>
-
     IconLeftWidget:
         icon: root.icon
+        on_press:Clipboard.copy(root.text)
+        theme_icon_color:"Custom"
+        icon_color:app.theme_cls.accent_light
 
 
 <PreviousMDIcons>
@@ -59,7 +61,6 @@ class CustomOneLineIconListItem(OneLineIconListItem):
 class PreviousMDIcons(Screen):
 
     def set_list_md_icons(self, text="", search=False):
-        '''Builds a list of icons for the screen MDIcons.'''
 
         def add_icon_item(name_icon):
             self.ids.rv.data.append(
@@ -80,16 +81,17 @@ class PreviousMDIcons(Screen):
                 add_icon_item(name_icon)
 
 
-class MainApp(MDApp):
+class IconSearch(MDApp):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.screen = PreviousMDIcons()
 
     def build(self):
+        self.theme_cls.theme_style = "Dark"
         return self.screen
 
     def on_start(self):
         self.screen.set_list_md_icons()
 
 
-MainApp().run()
+IconSearch().run()
