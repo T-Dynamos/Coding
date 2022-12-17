@@ -12,6 +12,7 @@ def multiply_polynomial(poly1:list,poly2:list) -> list:
     for i in max_lenght:
         for k in answer:
             if i == k[0]:
+
                 final_answer[i] += k[-1]
                 
     return final_answer
