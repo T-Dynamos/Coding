@@ -1,9 +1,14 @@
 ## Todo List (Start after my exams)
-* Make a charm_ python wrapper
+
+### Termux specific 
+* Complete cutefishde porting
+* Complete blender porting
+
+### Personal 
 * Launch privachat with ads
 * Make a new app
-> 
-  Concept : Check teachers knowledge
 
-* 
-* 
+> Concept : Check teachers knowledge
+
+* Complete SRAPS-App
+* Learn some c++ and c or maybe dart
