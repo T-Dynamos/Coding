@@ -1,15 +1,19 @@
-## Todo List (Start after my exams)
+## Todo List (Starting in +1)
 
-### Termux specific 
-[] Complete cutefishde porting
-[] Complete blender porting
+### Termux 
+- [ ] Complete cutefishde porting
+- [ ] Complete blender porting
 
 ### Personal 
-[] Launch privachat with ads
-[] Make arch Linux fourm unofficial client
-[] Make a new app
+- [x] Launch privachat with ads
+- [ ] Make arch Linux fourm unofficial client
+- [ ] Make a new app
 
-> Concept : Check teachers knowledge
+> Concept : Home screen Launcher
+Name : Snowflakes
 
-[] Complete SRAPS-App
-[] Learn some c++ and c or maybe dart
+- [ ] Complete SRAPS-App
+- [ ] Learn some c++ and c or maybe dart (no Java)
+
+### Money
+- [ ] Buy a raspberry Pi 4 or 400 before end of +1
