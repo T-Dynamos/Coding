@@ -1,6 +1,9 @@
 import string
 
-def check_passsword(password : str,sp_chars = ["#","$","@"],max_lenght=16,mini_lenght=6) -> list:
+
+def check_passsword(
+    password: str, sp_chars=["#", "$", "@"], max_lenght=16, mini_lenght=6
+) -> list:
     errors = []
     num = False
     sp_char = False
@@ -8,7 +11,7 @@ def check_passsword(password : str,sp_chars = ["#","$","@"],max_lenght=16,mini_l
     upercase = False
 
     for letter in password:
-        if letter in [str(number) for number in list(range(1,10))]:
+        if letter in [str(number) for number in list(range(1, 10))]:
             num = True
         if letter in string.ascii_lowercase:
             lowercase = True
@@ -17,18 +20,18 @@ def check_passsword(password : str,sp_chars = ["#","$","@"],max_lenght=16,mini_l
 
     if lowercase == False:
         errors.append("Please include at least one lowercase letter")
-    
+
     if upercase == False:
         errors.append("Please include at least one uppercase letter")
-    
+
     if num == False:
         errors.append("Letter missing form 1-9")
-    
+
     for char in sp_chars:
         if char in password:
             sp_char = True
             break
-    
+
     if sp_char == False:
         errors.append("Special character missing")
 

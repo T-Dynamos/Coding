@@ -8,7 +8,7 @@ from kivymd.uix.list import OneLineIconListItem
 
 
 Builder.load_string(
-    '''
+    """
 #:import images_path kivymd.images_path
 #: import Clipboard kivy.core.clipboard.Clipboard
 
@@ -50,7 +50,7 @@ Builder.load_string(
                 size_hint_y: None
                 height: self.minimum_height
                 orientation: 'vertical'
-'''
+"""
 )
 
 
@@ -59,9 +59,7 @@ class CustomOneLineIconListItem(OneLineIconListItem):
 
 
 class PreviousMDIcons(Screen):
-
     def set_list_md_icons(self, text="", search=False):
-
         def add_icon_item(name_icon):
             self.ids.rv.data.append(
                 {

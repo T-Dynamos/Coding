@@ -8,6 +8,7 @@
 - [x] Launch privachat with ads
 - [ ] Make arch Linux fourm unofficial client
 - [ ] Make a new app
+- [ ] Complete Igfreak
 
 > Concept : Home screen Launcher
 Name : Snowflakes

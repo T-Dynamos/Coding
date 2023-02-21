@@ -1,0 +1,42 @@
+from kivy.lang import Builder
+from kivymd.app import MDApp
+from kivy_garden.frostedglass import FrostedGlass
+from kivy.clock import Clock
+from kivy.animation import Animation
+import _thread
+
+KV = """
+MDRelativeLayout:
+    md_bg_color:app.theme_cls.opposite_bg_dark
+    Image:
+        id:img
+        source:"/home/tdynamos/SnowFlakes/inbuilt_themes/Default/background.jpg"
+        size_hint:1,0.5
+        pos_hint:{"top":1}
+        allow_stretch:True
+        keep_ratio:False
+
+    FrostedGlass:
+        id:glass
+        background:img
+        size_hint:0.6,0.2
+        pos_hint:{"center_x":0.5,"center_y":0.7}
+        blur_size:0
+        overlay_color:"#000000"
+
+        
+"""
+
+class Frost(MDApp):
+
+    def build(self):
+        return Builder.load_string(KV)
+    
+    def main_thread(self,arg):
+        Animation(blur_size=50,d=10).start(self.root.ids.glass)
+
+    def on_start(self):
+        Clock.schedule_once(self.main_thread)
+
+
+Frost().run()
