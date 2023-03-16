@@ -2,9 +2,10 @@
 
 ### Termux 
 - [ ] Complete cutefishde porting
-- [ ] Complete blender porting
+- [ ] Complete blender porting ( Almost done)
 
 ### Personal 
+- [ ] Add apis in BaapG-Attack
 - [x] Launch privachat with ads
 - [ ] Make arch Linux fourm unofficial client
 - [ ] Make a new app
