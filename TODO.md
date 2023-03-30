@@ -1,8 +1,10 @@
 ## Todo List (Starting in +1)
 
 ### Termux 
-- [ ] Complete cutefishde porting
-- [ ] Complete blender porting ( Almost done)
+- [ ] Port libreoffice
+
+
+- [x] Complete blender porting ( Almost done)
 
 ### Personal 
 - [ ] Add apis in BaapG-Attack
