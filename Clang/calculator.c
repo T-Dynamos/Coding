@@ -34,3 +34,7 @@ int main(int argc, char **argv) {
     printf("%s of %s and %s is %f\n",operator,argv[1],argv[2],total);
     return 0;
 }
+
+int is_valid_operator(char **string) {
+  return 0;
+}
