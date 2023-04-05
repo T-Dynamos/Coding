@@ -1,4 +1,4 @@
-It Outputs like :
+## `table.cpp` Outputs like :
 ```
 ~$ ./table 3 10
 ╔═════════════╗
@@ -15,4 +15,13 @@ It Outputs like :
 ║ 3 x 9 = 27  ║
 ║ 3 x 10 = 30 ║
 ╚═════════════╝
+```
+## `display.cpp` Outputs like:
+```
+~$ ./display 5 1 a
+┏━━━━┓
+┃    ┃
+┡━━━━┩
+┃    ┃
+┃    ┃
 ```
