@@ -355,7 +355,7 @@ print_decorated (string text, int char_type, int size)
 
 
   for (auto f : final_word) {
-    cout << f  << str(" " ,w_ -2) << chars[3]  << endl;
+    cout << f  << str(" " ,w_ - 2) << chars[3]  << endl;
   }
   cout << str( chars[3] + str(" ",width-2) + chars[3] + "\n"   ,(height - ( 1 + size + h_) ));
   cout << chars[9] << str(chars[1],width-2) << chars[10] << endl;
