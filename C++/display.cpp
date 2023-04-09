@@ -130,9 +130,9 @@ vector < string > get_alphabet (char *alphabet, int height, int char_type)
   }
 
   // minimum height 3
-  if (height < 3) {
-    height = 3;
-  }
+  //if (height < 3) {
+  //height = 3;
+  //}
 
   int char_width = mkint(height/1.3);
   int small_char_width = mkint(height/2.0);
@@ -299,6 +299,13 @@ vector < string > get_alphabet (char *alphabet, int height, int char_type)
   compiled_alphabet = add_list(tmp_compiled_alphabet);
   }
 
+  if (strcmp(alphabet, " ") == 0) 
+  {
+  tmp_compiled_alphabet = {
+    {str_list(str(" ", char_width) , height)}
+  };
+  compiled_alphabet = add_list(tmp_compiled_alphabet);
+  }
   return compiled_alphabet;
 }
     
@@ -326,9 +333,11 @@ print_decorated (string text, int char_type, int size)
   int width = term_size[0];
   int height = term_size[1];
 
+  vector<string> chars = get_chars(char_type);
+
   int w_ = width/2 - ((mkint(size/1.3) + 2 + size/3)*text.size())/2;
   int h_ = height/2 - (size/2);
-  vector <string> final_word = init_vector(size, str(" ", w_));
+  vector <string> final_word = init_vector(size, chars[3] + str(" ", w_-1));
 
   int i_a = 0;
   int i_b = 0;
@@ -336,16 +345,21 @@ print_decorated (string text, int char_type, int size)
   for (;i_a < final_word.size(); i_a += 1) { 
     for (char x : text) {
       vector<string> alphabet_ = get_alphabet(char_to_char_ptr(x), size,char_type);
-      final_word[i_a] = final_word[i_a] + str(" ",size/3) + alphabet_[i_b];
+      final_word[i_a] = final_word[i_a] + str(" ",mkint(size/3.0)) + alphabet_[i_b];
     }
     i_b += 1;
   }
+   
+  cout << chars[0] << str(chars[1],width-2) << chars[2] << endl;
+  cout << str(chars[3] + str(" ",width-2) + chars[3] + "\n"   ,h_-2);
 
-  cout << str("\n",h_);
+  int left = width - final_word[0].size() -  1;
+
   for (auto f : final_word) {
-    cout << f << endl;
+    cout << " " << width << " " << w_ <<f  << str(" " ,left) << chars[3]  << endl;
   }
-  cout << str("\n",h_);
+  cout << str( chars[3] + str(" ",width-2) + chars[3] + "\n"   ,(height - ( 1 + size + h_) ));
+  cout << chars[9] << str(chars[1],width-2) << chars[10] << endl;
 }
 
 int
@@ -354,11 +368,21 @@ main (int argc, char **argv)
   vector < int >term_size = terminal_size ();
   int width = term_size[0];
   int height = term_size[1];
-
   int i;
-  for (i = 0; i < mkint(width/10.0); i += 1) {
+ 
+  string t = argv[1];
+  int max_ = (width - width/5) / t.size();
+
+  if (max_ > height) {
+    max_ = height -4;
+  }
+ 
+  for (i = 0; i < max_; i += 1) {
     clear();
     print_decorated (argv[1], stoi (argv[2]) , i-1);
     sleep(100);
+  }
+  while (true) {
+    sleep(1000);
   }
 }
