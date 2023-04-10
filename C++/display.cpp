@@ -79,6 +79,17 @@ int mkint(double char_)
   return static_cast<int>(char_);
 }
 
+
+vector<string> init_vector(int lenght,string text) 
+{
+  vector<string> final_;
+  int i;
+  for (i = 0;i < lenght; i += 1) {
+    final_.push_back(text);
+  }
+  return final_;
+}
+
 vector < string > get_chars (int type)
 {
   vector < string > chars;
@@ -94,6 +105,14 @@ vector < string > get_chars (int type)
 	{ "╔", "═", "╗", "║", "╠", "╣", "╬", "╦", "╩",
     "╚", "╝" };
     }
+  else if (type == 3)
+    {
+    chars = init_vector(11,"*");
+  }
+  else if (type == 4) 
+  {
+    chars = init_vector(11,"█");
+  }
   return chars;
 }
 
@@ -302,21 +321,11 @@ vector < string > get_alphabet (char *alphabet, int height, int char_type)
   if (strcmp(alphabet, " ") == 0) 
   {
   tmp_compiled_alphabet = {
-    {str_list(str(" ", char_width) , height)}
+      {str_list(str(" ", char_width+2) , height)}
   };
   compiled_alphabet = add_list(tmp_compiled_alphabet);
   }
   return compiled_alphabet;
-}
-    
-vector<string> init_vector(int lenght,string text) 
-{
-  vector<string> final_;
-  int i;
-  for (i = 0;i < lenght; i += 1) {
-    final_.push_back(text);
-  }
-  return final_;
 }
 
 char* char_to_char_ptr(char c) {
@@ -326,6 +335,7 @@ char* char_to_char_ptr(char c) {
     return str;
 }
 
+
 void
 print_decorated (string text, int char_type, int size)
 {
@@ -333,11 +343,14 @@ print_decorated (string text, int char_type, int size)
   int width = term_size[0];
   int height = term_size[1];
 
+  int text_size = ( (mkint(size/1.3) + 2)*text.size() )  + (mkint(size/3.0)*(text.size())) ;
+
   vector<string> chars = get_chars(char_type);
 
   int w_ = width/2 - ((mkint(size/1.3) + 2 + size/3)*text.size())/2;
   int h_ = height/2 - (size/2);
-  vector <string> final_word = init_vector(size, chars[3] + str(" ", w_-1));
+
+  vector <string> final_word = init_vector(size, "" );
 
   int i_a = 0;
   int i_b = 0;
@@ -349,16 +362,18 @@ print_decorated (string text, int char_type, int size)
     }
     i_b += 1;
   }
-   
-  cout << chars[0] << str(chars[1],width-2) << chars[2] << endl;
-  cout << str(chars[3] + str(" ",width-2) + chars[3] + "\n"   ,h_-2);
 
+  cout << chars[0] << str(chars[1],width-2) << chars[2] << endl;
+  cout << str(chars[3] + str(" ",width-2) + chars[3] + "\n" ,h_-2);
 
   for (auto f : final_word) {
-    cout << f  << str(" " ,w_ - 2) << chars[3]  << endl;
+    int padding  = width/2 - text_size/2;
+    cout << chars[3] << str(" ",padding) << f << str(" ",width-(padding+text_size)-2) << chars[3] << endl;
   }
+
   cout << str( chars[3] + str(" ",width-2) + chars[3] + "\n"   ,(height - ( 1 + size + h_) ));
   cout << chars[9] << str(chars[1],width-2) << chars[10] << endl;
+
 }
 
 int
