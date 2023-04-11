@@ -20,6 +20,7 @@
  * THE SOFTWARE.
  */
 
+#include <cstdlib>
 #include <iostream>
 #include <vector>
 #include <string>
@@ -149,9 +150,9 @@ vector < string > get_alphabet (char *alphabet, int height, int char_type)
   }
 
   // minimum height 3
-  //if (height < 3) {
-  //height = 3;
-  //}
+  if (height < 3) {
+  height = 3;
+  }
 
   int char_width = mkint(height/1.3);
   int small_char_width = mkint(height/2.0);
@@ -200,12 +201,13 @@ vector < string > get_alphabet (char *alphabet, int height, int char_type)
   if (strcmp(alphabet, "d") == 0 ) 
   {
   tmp_compiled_alphabet = {
-    {chars[7]+ str(chars[1],char_width) + chars[2]},
-    {str_list(chars[3] + str(" ",char_width) + chars[3], height-2)},
-    {chars[8]+ str(chars[1],char_width) + chars[10]}
+    {chars[1]+ chars[7] + str(chars[1],char_width-1) + chars[2]},
+    {str_list(" " + chars[3] + str(" ",char_width-2) + " " + chars[3], height-2)},
+    {chars[1]+ chars[8] + str(chars[1],char_width-1) + chars[10]}
   };
   compiled_alphabet = add_list(tmp_compiled_alphabet);
   }
+
 
   // E
   if (strcmp(alphabet, "e") == 0 ) 
@@ -325,6 +327,32 @@ vector < string > get_alphabet (char *alphabet, int height, int char_type)
   };
   compiled_alphabet = add_list(tmp_compiled_alphabet);
   }
+  // W
+  if (strcmp(alphabet, "w") == 0 ) 
+  {
+  tmp_compiled_alphabet = {
+    {str_list(chars[3] + str(" ",char_width) + chars[3] ,height - (height/2) )},
+    {str_list(chars[3] + str(" ",half_char_width) + chars[3] + str(" ",char_width-half_char_width-1) + chars[3],(height/2) - 1)},
+    {chars[9] + str(chars[1],half_char_width) + chars[8] + str(chars[1],char_width-half_char_width-1) + chars[10]},
+  };
+  compiled_alphabet = add_list(tmp_compiled_alphabet);
+  }
+
+   // R
+   if (strcmp(alphabet, "r") == 0 ) 
+  {
+  int lower = height - upper - 2;
+  tmp_compiled_alphabet = {
+    {chars[0]+ str(chars[1],char_width) + chars[2]},
+    {str_list(chars[3] + str(" ",char_width) + chars[3], upper)},
+    {chars[4] + str(chars[1],char_width) + chars[10]},
+  };
+  int o;
+  for (o = 1; o <= lower; o += 1) {
+    tmp_compiled_alphabet.push_back({chars[3] + str(" ",o) + chars[3] + str(" ", char_width - o)});
+  }
+  compiled_alphabet = add_list(tmp_compiled_alphabet);
+  }
   return compiled_alphabet;
 }
 
@@ -390,13 +418,21 @@ main (int argc, char **argv)
   if (max_ > height) {
     max_ = height -4;
   }
+  int k = max_;
  
-  for (i = 0; i < max_; i += 1) {
-    clear();
-    print_decorated (argv[1], stoi (argv[2]) , i-1);
-    sleep(100);
-  }
+  int sleep_time = stoi(argv[3]);
+
   while (true) {
-    sleep(1000);
-  }
+    for (i = 4; i <= max_; i += 1) {
+      clear();
+      print_decorated (argv[1], stoi (argv[2]) , i-1);
+      sleep(sleep_time);
+    }
+    for (k = max_ - 1 ; k > 4; k -= 1) {
+
+      clear();
+      print_decorated (argv[1], stoi (argv[2]) , k-1);
+      sleep(sleep_time);
+    }
+ }
 }
