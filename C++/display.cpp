@@ -33,6 +33,15 @@
 
 using namespace std;
 
+string red=    "\033[1;31m";
+string green=  "\033[1;32m";
+string yellow= "\033[1;33m";
+string blue=   "\033[1;34m";
+string purple= "\033[1;35m";
+string cyan=   "\033[1;36m";
+string grey=   "\033[1;37m";
+string white=  "\033[1;38m";
+
 void
 clear ()
 {
@@ -113,6 +122,7 @@ vector < string > get_chars (int type)
   else if (type == 4) 
   {
     chars = init_vector(11,"█");
+
   }
   return chars;
 }
@@ -368,12 +378,14 @@ void
 print_decorated (string text, int char_type, int size)
 {
   vector < int >term_size = terminal_size ();
+
   int width = term_size[0];
   int height = term_size[1];
 
-  int text_size = ( (mkint(size/1.3) + 2)*text.size() )  + (mkint(size/3.0)*(text.size())) ;
-
   vector<string> chars = get_chars(char_type);
+
+  int text_size = ( (mkint(size/1.3) + 2)*text.size() ) + (mkint(size/3.0)*(text.size())) ;
+
 
   int w_ = width/2 - ((mkint(size/1.3) + 2 + size/3)*text.size())/2;
   int h_ = height/2 - (size/2);
@@ -404,10 +416,65 @@ print_decorated (string text, int char_type, int size)
 
 }
 
+string tostring(vector<string> list, string sep) {
+  string final_ = "";
+  for (auto x : list ) {
+    final_ = final_ + x + sep;
+  }
+  return final_;
+}
+
+
 int
 main (int argc, char **argv)
 {
+
+  vector<string> colors = {"red","green","yellow","blue","purple","cyan","white","grey"};
+  string colorss = tostring(colors,", ");
+
+  colorss.pop_back();
+  colorss.pop_back();
+
+  if (argc > 5 || argc < 5) {
+    cout << "Insuffient Args!\nUse: " << argv[0] << " <type of char (1-4)> <sleeptime (in ms) > <color>\nColor can be " + colorss << "\n";
+    return 1;
+  } 
+
+  string color = "none";
+  string c_ = argv[4];
+  
+  for (auto x :colors) {
+    if (x == c_) {
+      color = x;
+    }
+  }
+
+  if (color == "none") {
+    cout << "Provide correct color : " +  colorss + "\n";
+    return 1;
+  }
+
+  string oricolor;
+
+  if (color == "grey") {
+    oricolor = grey;
+  } else if (color == "white") {
+    oricolor = white;
+  } else if (color == "yellow") {
+    oricolor = yellow;
+  } else if (color == "blue") {
+    oricolor = blue;
+  } else if (color == "green") {
+    oricolor = green;
+  } else if (color == "cyan") {
+    oricolor = cyan;
+  } else if (color == "red") {
+    oricolor = red;
+  }
+  cout << oricolor;
+
   vector < int >term_size = terminal_size ();
+
   int width = term_size[0];
   int height = term_size[1];
   int i;
@@ -434,5 +501,14 @@ main (int argc, char **argv)
       print_decorated (argv[1], stoi (argv[2]) , k-1);
       sleep(sleep_time);
     }
+  
+  // Update is terminal size changes
+  width = terminal_size()[0];
+  max_ = (width - width/5) / t.size();
+
+  if (max_ > height) {
+    max_ = height -4;
+  }
+
  }
 }
