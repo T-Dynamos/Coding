@@ -117,7 +117,7 @@ vector < string > get_chars (int type)
     }
   else if (type == 3)
     {
-    chars = init_vector(11,"*");
+    chars = init_vector(11,"{}");
   }
   else if (type == 4) 
   {
@@ -187,8 +187,8 @@ vector < string > get_alphabet (char *alphabet, int height, int char_type)
     char_width += 1;
   }
   tmp_compiled_alphabet = {
-    {chars[0] + str(chars[1], small_char_width) + chars[2]},
-    {str_list(chars[3] + str(" ",small_char_width) + chars[3], upper)},
+    {chars[0] + str(chars[1], small_char_width) + chars[2] + str(" ",char_width-small_char_width)},
+    {str_list(chars[3] + str(" ",small_char_width) + chars[3] + str(" ",char_width-small_char_width), upper)},
     {chars[4] + str(chars[1], small_char_width) + chars[8] + str(chars[1],char_width-(small_char_width+1)) + chars[2]},
     {str_list(chars[3] + str(" ",char_width) + chars[3], height - upper - 3)},
     {chars[9]+ str(chars[1],char_width) + chars[10]}
@@ -210,10 +210,11 @@ vector < string > get_alphabet (char *alphabet, int height, int char_type)
  // D
   if (strcmp(alphabet, "d") == 0 ) 
   {
+  int near_1 = (char_width+2) / 4;
   tmp_compiled_alphabet = {
-    {chars[1]+ chars[7] + str(chars[1],char_width-1) + chars[2]},
-    {str_list(" " + chars[3] + str(" ",char_width-2) + " " + chars[3], height-2)},
-    {chars[1]+ chars[8] + str(chars[1],char_width-1) + chars[10]}
+    {str(chars[1],near_1) + chars[7] + str(chars[1],char_width-near_1) + chars[2]},
+    {str_list(str(" ",near_1) + chars[3] + str(" ",char_width-near_1-1) + " " + chars[3], height-2)},
+    {str(chars[1],near_1)+ chars[8] + str(chars[1],char_width-near_1) + chars[10]}
   };
   compiled_alphabet = add_list(tmp_compiled_alphabet);
   }
@@ -293,18 +294,22 @@ vector < string > get_alphabet (char *alphabet, int height, int char_type)
   compiled_alphabet = add_list(tmp_compiled_alphabet);
   }
 
-  // K
-  if (strcmp(alphabet, "k_") == 0 ) 
+
+    // K
+   if (strcmp(alphabet, "k") == 0 ) 
   {
-  string previous_char;
-  tmp_compiled_alphabet = {
-    {chars[3]+ str(" ",char_width-1) + chars[0] + chars[10]},
-    {str_list(chars[3] + str(" ",char_width+1), upper)},
-    {chars[4] + str(chars[1],small_char_width) + chars[5]},
-    {str_list(chars[3] + str(" ",char_width+1), height - upper - 3)},
-    {chars[3]+ str(" ",char_width) + chars[2] + chars[9]},
-  };
+
+  int half = mkint(height/2.0) - 1;
+  int op;
+  for (op = half  + 1; op >= 0; op -= 1) {
+    tmp_compiled_alphabet.push_back({chars[3] + str(" ",op) + chars[3] + str(" ", char_width - op)});
+  }
+ int o;
+  for (o = 1; o <= (height - half) + 1 ; o += 1) {
+    tmp_compiled_alphabet.push_back({chars[3] + str(" ",o) + chars[3] + str(" ", char_width - o)});
+  }
   compiled_alphabet = add_list(tmp_compiled_alphabet);
+ return compiled_alphabet;
   }
 
   // L
@@ -314,6 +319,16 @@ vector < string > get_alphabet (char *alphabet, int height, int char_type)
     {chars[3]+ str(" ",char_width+1)},
     {str_list(chars[3] + str(" ",char_width+1),height-2)},
     {chars[9]+ str(chars[1],char_width+1)}
+  };
+  compiled_alphabet = add_list(tmp_compiled_alphabet);
+  }
+
+   // N
+   if (strcmp(alphabet, "n") == 0 ) 
+  {
+  tmp_compiled_alphabet = {
+    {chars[0] + str(chars[1],char_width) + chars[2]},
+    {str_list(chars[3] + str(" ",char_width) + chars[3], height-1)}
   };
   compiled_alphabet = add_list(tmp_compiled_alphabet);
   }
@@ -363,6 +378,20 @@ vector < string > get_alphabet (char *alphabet, int height, int char_type)
   }
   compiled_alphabet = add_list(tmp_compiled_alphabet);
   }
+
+  // S
+  if (strcmp(alphabet, "s") == 0 ) 
+  {
+  tmp_compiled_alphabet = {
+    {chars[0]+ str(chars[1],char_width+1)},
+    {str_list(chars[3] + str(" ",char_width+1), upper)},
+    {chars[9] + str(chars[1],char_width)  + chars[2]},
+    {str_list(str(" ",char_width+1) + chars[3] , height - upper - 3)},
+    {str(chars[1],char_width+1) + chars[10]},
+  };
+  compiled_alphabet = add_list(tmp_compiled_alphabet);
+  }
+
   return compiled_alphabet;
 }
 
@@ -454,7 +483,7 @@ main (int argc, char **argv)
     return 1;
   }
 
-  string oricolor;
+  string oricolor;  
 
   if (color == "grey") {
     oricolor = grey;
