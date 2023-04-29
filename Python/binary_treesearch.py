@@ -32,7 +32,7 @@ def get_index(original_list, value) -> int:
 
     while value in original_list:
         cards_flipped += 1
-        print("Bin method", cards_flipped)
+        #print("Bin method", cards_flipped)
         left = original_list[original_list.index(mid) - 1]
         right = original_list[original_list.index(mid) + 1]
         get_mid = lambda: original_list[
@@ -66,13 +66,12 @@ def get_index_br(original_list, value) -> int:
     cards_flipped = 0
     for i in original_list:
         cards_flipped += 1
-        print("Cards flipped ", cards_flipped)
         if i == value:
             return original_list.index(i)
     return -1
 
 
-original_list = range(0, 10)[::-1]
+original_list = range(0, 1000000)[::-1]
 value = 6
 
 bin_method = test(get_index, (original_list, value), value)

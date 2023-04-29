@@ -187,8 +187,8 @@ vector < string > get_alphabet (char *alphabet, int height, int char_type)
     char_width += 1;
   }
   tmp_compiled_alphabet = {
-    {chars[0] + str(chars[1], small_char_width) + chars[2] + str(" ",char_width-small_char_width)},
-    {str_list(chars[3] + str(" ",small_char_width) + chars[3] + str(" ",char_width-small_char_width), upper)},
+    {chars[0] + str(chars[1], small_char_width) + chars[2] + str(" ",(char_width)-small_char_width)},
+    {str_list(chars[3] + str(" ",small_char_width) + chars[3] + str(" ",(char_width)-small_char_width), upper)},
     {chars[4] + str(chars[1], small_char_width) + chars[8] + str(chars[1],char_width-(small_char_width+1)) + chars[2]},
     {str_list(chars[3] + str(" ",char_width) + chars[3], height - upper - 3)},
     {chars[9]+ str(chars[1],char_width) + chars[10]}
@@ -276,7 +276,7 @@ vector < string > get_alphabet (char *alphabet, int height, int char_type)
   {
   tmp_compiled_alphabet = {
     {str(chars[1],half_char_width+1) + chars[7] + str(chars[1],char_width-half_char_width)},
-    {str_list(str(" ",half_char_width+1) + chars[3] + str(" ",char_width-half_char_width-1),height-2)},
+    {str_list(str(" ",half_char_width+1) + chars[3] + str(" ",char_width-(half_char_width)),height-2)},
     {str(chars[1],half_char_width+1) + chars[8] + str(chars[1],char_width-half_char_width)},
   };
   compiled_alphabet = add_list(tmp_compiled_alphabet);
