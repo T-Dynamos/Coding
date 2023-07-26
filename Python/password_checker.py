@@ -1,48 +1,25 @@
-import string
-
-
-def check_passsword(
-    password: str, sp_chars=["#", "$", "@"], max_lenght=16, mini_lenght=6
-) -> list:
+def validate_password(password):
     errors = []
-    num = False
-    sp_char = False
-    lowercase = False
-    upercase = False
-
-    for letter in password:
-        if letter in [str(number) for number in list(range(1, 10))]:
-            num = True
-        if letter in string.ascii_lowercase:
-            lowercase = True
-        if letter in string.ascii_uppercase:
-            upercase = True
-
-    if lowercase == False:
-        errors.append("Please include at least one lowercase letter")
-
-    if upercase == False:
-        errors.append("Please include at least one uppercase letter")
-
-    if num == False:
-        errors.append("Letter missing form 1-9")
-
-    for char in sp_chars:
-        if char in password:
-            sp_char = True
-            break
-
-    if sp_char == False:
-        errors.append("Special character missing")
-
-    if len(password) < mini_lenght:
-        errors.append("Minimum lenght 6 not provided")
-
-    if len(password) >= max_lenght:
-        errors.append("Maximum lenght is 16")
-
+    ___ = lambda _ : not any([__ in password for __ in _])
+    checkers = [
+        lambda : "lenght must be greator then or equal to 8" if len(password) <= 8 else None,
+        lambda : "lenght must be shorter then or equal to 16" if len(password) >= 16 else None,
+        lambda : "must cointain a special character in one of '$@#*%'" if ___("$@#*%") else None,
+        lambda : "must cointain a capital letter" if ___("ABCDEFGHIJKLMNOPQRSTUVWXYZ") else None,
+        lambda : "must cointain a lowercase letter" if ___("abcdefghijklmnopqrstuvwxyz") else None,
+        lambda : "must cointain a numeric character" if ___("123456789") else None,
+    ]
+    for _ in checkers:
+        __ = _()
+        if __ is not None:
+            errors.append(__)
     return errors
 
+errors = validate_password(password = "$AnshDadwal69")
 
-password = "Rea#db3"
-print(check_passsword(password))
+if len(errors) != 0:
+    print("Your code has following errors: ")
+    for count, error in enumerate(errors):
+        print("{}. Password {}".format(count + 1 , error))
+else:
+    print("Password looks good!")

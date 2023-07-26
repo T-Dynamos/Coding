@@ -436,7 +436,7 @@ print_decorated (string text, int char_type, int size)
   cout << str(chars[3] + str(" ",width-2) + chars[3] + "\n" ,h_-2);
 
   for (auto f : final_word) {
-    int padding  = width/2 - text_size/2;
+    int padding  = (width/2 - text_size/2) - 4 ;
     cout << chars[3] << str(" ",padding) << f << str(" ",width-(padding+text_size)-2) << chars[3] << endl;
   }
 

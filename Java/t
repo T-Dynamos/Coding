@@ -1,0 +1,21 @@
+public class Hello {
+  public static void main(String[] args) {
+    int n_  = 10; 
+    int n = n_*2;
+
+    for (int i = 1; i <= n-1 ; i+= 2) {
+
+      int s = ((n/2) - i) / 2 ;
+      int s2 = ((n/2) - (n-i))/ 2;
+
+      if (i < n/2 ) {
+        System.out.println(
+            " ".repeat(s) + "*".repeat(i)
+        );
+      } else {
+        System.out.println(" ".repeat(s2) + "*".repeat(n - i) );
+      }
+    }
+
+  }
+}
