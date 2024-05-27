@@ -41,3 +41,6 @@ def get_hcf(*numbers) -> list:
             rem = n[1] % rem
         solved_chunks[count] = rem
     return solved_chunks
+
+
+print(get_lcm(6939))
