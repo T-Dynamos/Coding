@@ -465,7 +465,7 @@ main (int argc, char **argv)
   colorss.pop_back();
 
   if (argc > 5 || argc < 5) {
-    cout << "Insuffient Args!\nUse: " << argv[0] << " <type of char (1-4)> <sleeptime (in ms) > <color>\nColor can be " + colorss << "\n";
+    cout << "Insuffient Args!\nUse: " << argv[0] << "<text> <type of char (1-4)> <sleeptime (in ms)> <color>\nColor can be " + colorss << "\n";
     return 1;
   } 
 
