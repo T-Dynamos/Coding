@@ -56,7 +56,7 @@ view.add(
 points_to_scatter(
 # functions to points
 function_to_points(
-    lambda x: ( math.sin(math.pi*x + 10*x), math.cos(math.pi*x + 10*x)  ), #*(1.5/1)), 
+    lambda x: ( math.sin(x) , math.cos(-2*x)  ), #*(1.5/1)), 
     -math.pi*10,
     math.pi*10,
     0.01,
