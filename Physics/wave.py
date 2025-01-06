@@ -7,10 +7,14 @@ import gc
 from kivy.uix.floatlayout import FloatLayout
 from kivy.properties import ListProperty
 from kivy.metrics import dp
+from Physics.video import VideoRecordingApp
+from kivy.core.window import Window
 
+Window.size = [700, 500] 
 
 class LineAnimation(FloatLayout):
     points = ListProperty([])
+
 
 
 KV = """ 
@@ -118,7 +122,7 @@ RelativeLayout:
 """
 
 
-class WaveAnimation(App):
+class WaveAnimation(VideoRecordingApp):
     particle = None
 
     # ui constants
@@ -134,7 +138,8 @@ class WaveAnimation(App):
         ) * 0.5
         Clock.schedule_interval(self.update, 0)
         Clock.schedule_interval(self._print_fps, 1)
-        Clock.schedule_interval(lambda _: gc.collect(), 60)
+        super().on_start()
+        # Clock.schedule_interval(lambda _: gc.collect(), 60)
 
     def wave(self, amplitude, freq, k, x, t):
         return amplitude * math.sin(2 * math.pi * freq * t + k * x)
@@ -157,6 +162,7 @@ class WaveAnimation(App):
 
     def _print_fps(self, *largs):
         self.root.ids.fps.text = "FPS: " + str(Clock.get_rfps())
+
 
     def update(self, dt):
         # UI related internal stuff
