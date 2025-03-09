@@ -9,6 +9,8 @@ import time
 from kivy.config import Config
 import traceback
 
+Config.set("graphics", "maxfps", 0)
+
 class ThreadExecutor:
     _thread = None
 
