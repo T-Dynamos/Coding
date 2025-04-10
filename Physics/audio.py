@@ -21,6 +21,6 @@ def play_function(func):
 def func():
     duration = 0.5
     t = np.linspace(0, duration, int(rate * duration), endpoint=False)
-    return 1 * np.sin(2*np.pi  *  num *t) 
+    return 2 * np.sin(2*np.pi  *  num *t) 
 
 play_function(func())
